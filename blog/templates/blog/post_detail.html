@@ -74,6 +74,10 @@
                                 <i class="bi bi-filetype-doc bi-filetype-docx"></i>
                             {% elif post.get_file_ext == "TXT" or post.get_file_ext == "txt" %}
                                 <i class="bi bi-filetype-txt"></i>
+                            {% elif post.get_file_ext == "jpg" or post.get_file_ext == "png" %}
+                                <i class="bi bi-filetype-jpg bi-filetype-png"></i>
+                            {% elif post.get_file_ext == "ppt" or post.get_file_ext == "pptx" %}
+                                <i class="bi bi-filetype-ppt bi-filetype-pptx"></i>
                             {% else %}
                                 <i class="bi bi-files"></i>
                             {% endif %}
