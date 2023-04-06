@@ -5,5 +5,5 @@ urlpatterns = [
     # /
     path('', views.landing, name='landing'),
     # /about_me/
-    path('about_me/', views.about_me, name='about_me'),
+    path('aboutme/', views.about_me, name='aboutme'),
 ]
