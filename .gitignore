@@ -132,3 +132,4 @@ dmypy.json
 doit_venv/
 migrations/
 _media/
+note/
