@@ -28,15 +28,28 @@
             <hr />
             <!-- Preview image-->
             {% if post.head_image %}
-            <img class="card-img-top" src="{{ post.head_image.url }}" alt="{{ post }} Card image cap">
+                <img class="card-img-top" src="{{ post.head_image.url }}" alt="{{ post }} Card image cap">
             {% else %}
-            <img class="card-img-top" src="https://picsum.photos/id/{{ post.id }}/750/200" alt="random_image">
+                <img class="card-img-top" src="https://picsum.photos/id/{{ post.id }}/750/200" alt="random_image">
             {% endif %}
             <hr />
             <!-- Post content-->
             <p class="lead">
                 {{ post.content }}
             </p>
+
+            {% if post.tags.exists %}
+                <i class="bi bi-tags"></i>
+                {% for tag in post.tags.iterator %}
+                    <a href="{{ tag.get_absolute_url }}">
+                        <span class="badge badge-light">
+                            {{ tag }}
+                        </span>
+                    </a>
+                {% endfor %}
+                <br>
+                <br>
+            {% endif %}
             {% if post.file_upload %}
             <a href="{{ post.file_upload.url }}" class="btn btn-outline-dark" role="button" download>
                 Download:
