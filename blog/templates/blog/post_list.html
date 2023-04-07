@@ -4,6 +4,13 @@
 <!-- Blog entries-->
 <div class="row">
     <div class="col-lg-8" id="main-area">
+        {% if user.is_authenticated %}
+            {% if user.is_superuser or user.is_staff %}
+                <a href="{% url 'writeform' %}" class="btn btn-info btn-sm float-right" role="button">
+                    <i class="bi bi-pencil-fill"></i>New Post
+                </a>
+            {% endif %}
+        {% endif %}
         <h1 class="my-4">
             Blog
             {% if category %}

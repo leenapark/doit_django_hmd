@@ -1,18 +1,25 @@
 {% extends "base.html" %}
 
 {% block head_title %}
-    Create Post - Blog
+Create Post - Blog
 {% endblock %}
 
 
 {% block main_area %}
-  <h1>Create New Post</h1>
-  <hr>
-  <form action="." method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <table>
-      {{ form }}
-    </table>
-    <button type="submit" class="btn btn-primary float-right">Submit</button>
-  </form>
+
+<div class="row">
+  <div class="col-lg-12" id="main-area">
+    <h1 class="my-4">Create New Post</h1>
+    <hr>
+
+    <form action="." method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <table>
+        {{ form }}
+      </table>
+      <button type="submit" class="btn btn-primary float-right">Submit</button>
+    </form>
+  </div>
+</div>
+
 {% endblock %}
