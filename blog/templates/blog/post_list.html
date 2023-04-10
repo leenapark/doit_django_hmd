@@ -12,7 +12,14 @@
             {% endif %}
         {% endif %}
         <h1 class="my-4">
-            Blog
+            <a href="{% url 'post_list' %}">
+                Blog
+            </a>
+            {% if search_info %}
+                <small class="text-muted">
+                    {{ search_info }}
+                </small>
+            {% endif %}
             {% if category %}
                 <span class="badge badge-secondary">
                     {{ category }}

@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.db.models import Q
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
@@ -6,6 +7,7 @@ from .models import Post, Category, Tag
 from .form import PostForm
 
 # Create your views here.
+# 게시글 목록
 class PostList(ListView):
   model = Post
   # post_list.html : class이름_list.html 내부적으로 정의가 되어있기 때문에 생략가능
@@ -19,6 +21,7 @@ class PostList(ListView):
     context["no_category_post_count"] = Post.objects.filter(category = None).count()
     return context
 
+# 게시글 읽기
 class PostDetail(DetailView):
   model = Post
   # template_name = 'blog/post_detail.html'
@@ -28,7 +31,8 @@ class PostDetail(DetailView):
     context["categories"] = Category.objects.all()
     context["no_category_post_count"] = Post.objects.filter(category = None).count()
     return context
-    
+
+# 게시글 쓰기
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
   # model = Post
   # fields = ["title", "hook_text", "content", "head_image", "file_upload", "category"]
@@ -57,7 +61,26 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
       return super(PostUpdate, self).dispatch(request, *args, **kwargs)
     else:
       raise PermissionDenied
+
+# 게시글 검색
+class PostSearch(PostList):
+  paginate_by = None
   
+  def get_queryset(self):
+    q = self.kwargs["q"]
+    post_list = Post.objects.filter(
+      Q(title__contains=q) | Q(tags__name__contains=q)
+    ).distinct()
+    return post_list
+  
+  def get_context_data(self, **kwargs):
+    context = super(PostSearch, self).get_context_data()
+    q = self.kwargs["q"]
+    context["search_info"] = f"Search: {q} ({self.get_queryset().count()})"
+    return context
+
+
+
 def category_page(request, slug):
   # context = {}
   # category = Category.objects.get(slug=slug)

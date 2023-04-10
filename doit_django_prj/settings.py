@@ -154,7 +154,10 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 
-# SITE_ID = 1
+SITE_ID = 1
+
+ACCOUNT_EMAIL_REQIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "none"
 
 # # Provider specific settings
 # SOCIALACCOUNT_PROVIDERS = {
@@ -169,3 +172,5 @@ AUTHENTICATION_BACKENDS = [
 #         }
 #     }
 # }
+
+LOGIN_REDIRECT_URL = "/blog/"

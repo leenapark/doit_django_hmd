@@ -1,3 +1,5 @@
+  {% load socialaccount %}
+  
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
@@ -19,12 +21,23 @@
           <li class="nav-item"><a class="nav-link" href="#!">My Skill</a></li>
         </ul>
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <!-- Button trigger modal -->
-            <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal">
-              <i class="bi bi-box-arrow-in-right"></i> Login
-            </a>
-          </li>
+          {% if user.is_authenticated %}
+            <li class="nav-item dropdown">
+              <a href="" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ user.username }}
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a href="/accounts/logout/" class="dropdown-item">Log Out</a>
+              </div>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <!-- Button trigger modal -->
+              <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal">
+                <i class="bi bi-box-arrow-in-right"></i> Login
+              </a>
+            </li>
+          {% endif %}
         </ul>
       </div>
     </div>
@@ -42,9 +55,9 @@
         </button>
       </div>
       <div class="modal-body">
-          <a href="" class="btn btn btn-outline-secondary btn-lg btn-block" role="button"><i class="bi bi-google"></i> Login with Google</a>
-          <a href="" class="btn btn btn-outline-secondary btn-lg btn-block" role="button"><i class="bi bi-envelope-fill"></i> SignUp with E-mail</a>
-          <a href="" class="btn btn btn-outline-secondary btn-lg btn-block" role="button"><i class="bi bi-envelope-fill"></i> Login with E-mail</a>
+          <a href="{% provider_login_url 'google' %}" class="btn btn btn-outline-secondary btn-lg btn-block" role="button"><i class="bi bi-google"></i> Login with Google</a>
+          <a href="/accounts/signup/" class="btn btn btn-outline-secondary btn-lg btn-block" role="button"><i class="bi bi-envelope-fill"></i> SignUp with E-mail</a>
+          <a href="/accounts/login/" class="btn btn btn-outline-secondary btn-lg btn-block" role="button"><i class="bi bi-envelope-fill"></i> Login with E-mail</a>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
