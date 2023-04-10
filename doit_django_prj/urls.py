@@ -27,6 +27,7 @@ urlpatterns = [
     # /about_me/
     path('', include('single_pages.urls')),
     path('summernote/', include('django_summernote.urls')),
+    path('accounts/', include('allauth.urls')),
 ]
 
 if settings.DEBUG:

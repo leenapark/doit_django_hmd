@@ -6,7 +6,6 @@ from .models import Post, Category, Tag
 from .form import PostForm
 
 # Create your views here.
-
 class PostList(ListView):
   model = Post
   # post_list.html : class이름_list.html 내부적으로 정의가 되어있기 때문에 생략가능
@@ -106,3 +105,4 @@ def tag_page(request, slug):
     "blog/post_list.html",
     tagcontext
   )
+
