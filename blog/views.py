@@ -3,6 +3,7 @@ from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from .models import Post, Category, Tag
+from .form import PostForm
 
 # Create your views here.
 
@@ -30,9 +31,10 @@ class PostDetail(DetailView):
     return context
     
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
-  model = Post
-  fields = ["title", "hook_text", "content", "head_image", "file_upload", "category"]
-
+  # model = Post
+  # fields = ["title", "hook_text", "content", "head_image", "file_upload", "category"]
+  form_class = PostForm
+  template_name = "blog/post_form.html"
   def test_func(self):
     return self.request.user.is_superuser or self.request.user.is_staff
 

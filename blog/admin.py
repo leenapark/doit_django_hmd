@@ -1,3 +1,4 @@
+from django_summernote.admin import SummernoteModelAdmin
 from django.contrib import admin
 from .models import Post, Category, Tag
 
@@ -9,6 +10,12 @@ class CategoryAdmin(admin.ModelAdmin):
 class TagAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name", )}
 
-admin.site.register(Post)
+class PostAdmin(SummernoteModelAdmin):
+    summernote_fields = ('content',)
+
+
+admin.site.register(Post, PostAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Tag, TagAdmin)
+
+
