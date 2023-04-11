@@ -12,7 +12,30 @@
   {% block main_area %}
       <div class="row justify-content-between">
         <div class="col-lg-6 text-light">
-          <h1>여기는 코즈랩 홈페이지 입니다.</h1>
+          <h1>Do it! Django!</h1>
+          <p>파이썬의 진영의 가장 대표적인 웹프레임워크 중 하나인 django를 이용하여 여러분만의 블로그 사이트를 만들어보세요.</p>
+        </div>
+        <div class="col-lg-5 mt5">
+          <h2 class="text-light">
+            Blog - Recent posts
+          </h2>
+          {% for post in recent_posts %}
+            <div class="card mt-1">
+              <div class="card-body">
+                <h6>
+                  <a href="{{ post.get_absolute_url }}" class="text-decoration-none text-dark">
+                    {{ post.title }}
+                  </a>
+                </h6>
+                <span class="badge badge-pill badge-light float-right">
+                  {{ post.author.username }}
+                  &nbsp;
+                  &nbsp;
+                  {{ post.created_at }}
+                </span>
+              </div>
+            </div>
+          {% endfor %}
         </div>
       </div>
   {% endblock %}

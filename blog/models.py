@@ -78,3 +78,10 @@ class Comment(models.Model):
 
   def get_absolute_url(self):
     return f'{self.post.get_absolute_url()}#comment-{self.pk}'
+  
+  # user profile img
+  def get_avatar_url(self):
+    if self.author.socialaccount_set.exists():
+      self.author.socialaccount_set.first().get_avatar_url()
+    else:
+      return "http://placehold.it/50x50"
