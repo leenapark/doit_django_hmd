@@ -1,10 +1,166 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block head_title %}
-{{post.title}}
+  About Leena
 {% endblock %}
-
+{% block style %}
+  <link rel="stylesheet" href="{% static 'single_pages/css/about_me.css' %}" media="screen">
+{% endblock %}
 
 {% block main_area %}
-  <h1>Cozlab을 소개합니다.</h1>
-{% endblock %}
+  <section>
+    <div class="row">
+      <div class="col-lg-8">
+        <h1>Leena</h1>
+        <br>
+        <p class="lead">
+          음악과 컴퓨터를 좋아합니다. <br>
+          개발로 돈을 벌고, 퇴근 후에는 운동을 하거나 책을 쓰면서 지냅니다.
+        </p>
+        <ul>
+          <li>
+            WORK EXPERIENCE
+          </li>
+          <ul>
+            <li>크고 좋은 회사 - 빅데이터 분석(2019.10~)</li>
+            <li>모모 공공 기관 (2016.02 ~ 2019.09)</li>
+          </ul>
+          <li>EDUCATION</li>
+          <ul>
+            <li>공학박사, 장고공학(Django Engineering), 파이썬 대박교(2010.03~2015.09)</li>
+            <li>공학박사, 장고공학(Django Engineering), 파이썬 대박교(2007.09~2009.08)</li>
+            <li>공학박사, 장고공학(Django Engineering), 파이썬 대박교(2003.03~2007.08)</li>
+          </ul>
+          <li>PUBLOSH</li>
+          <ul>
+            <li>DO IT DJANGO, 이지스퍼블리싱(2020)</li>
+          </ul>
+        </ul>
+      </div>
+      <div class="col-lg-4">
+        <img src="{% static 'single_pages/img/main01.jpg' %}" alt="" class="img-fluid">
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-light margin-for-footer">
+    <div class="row">
+      <div class="col-12">
+        <h1>
+          PORTFOLIO
+        </h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card" data-toggle="modal" data-target="#modalPort2">
+          <img class="card-img-top" src="{% static 'single_pages/img/morten-hornum-N-taROD4fLQ-unsplash.jpg' %}" alt="">
+          <div class="card-body">
+            <h5 class="card-title">
+              파이썬으로 통계 업무 자동화 하기
+            </h5>
+            <p>Python, Django, Pandas, python-docx로 통계 업무 자동화한 내용을 파이콘에서 발표했습니다.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card" data-toggle="modal" data-target="#modalPort2">
+          <img class="card-img-top" src="{% static 'single_pages/img/ohtilly-AV4AOxdJH8I-unsplash.jpg' %}" alt="">
+          <div class="card-body">
+            <h5 class="card-title">
+              파이썬 사용자를 위한 웹개발 입문 A to Z Django + Bootstrap
+            </h5>
+            <p>파이썬 웹개발에 대한 인프런 동영상 강의입니다</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card" data-toggle="modal" data-target="#modalPort3">
+          <img class="card-img-top" src="{% static 'single_pages/img/pawel-czerwinski-sXESiqE2gN0-unsplash.jpg' %}" alt="">
+          <div class="card-body">
+            <h5 class="card-title">
+              직장인을 위한 프로그래밍 입문과 업무 자동화 활용
+            </h5>
+            <p>파이썬 업무 자동화에 대한 인프런 동영상 강의 입니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Modal -->
+<div class="modal fade" id="modalPort1" tabindex="-1" role="dialog" aria-labelledby="portfolio1ModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img src="{% static 'single_pages/img/morten-hornum-N-taROD4fLQ-unsplash.jpg' %}" alt="" class="card-img-top">
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">파이썬으로 통계 업무 자동화 하기</h5>
+        <p>Python, Django, Pandas, python-docx로 통계 업무 자동화한 내용을 파이콘에서 발표했습니다.</p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>
+</div>
+<div class="modal fade" id="modalPort2" tabindex="-1" role="dialog" aria-labelledby="portfolio1ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img class="card-img-top" src="{% static 'single_pages/img/ohtilly-AV4AOxdJH8I-unsplash.jpg' %}" alt="">
+        <div class="card-body">
+          <h5 class="card-title">
+            파이썬 사용자를 위한 웹개발 입문 A to Z Django + Bootstrap
+          </h5>
+          <p>파이썬 웹개발에 대한 인프런 동영상 강의입니다</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="modalPort3" tabindex="-1" role="dialog" aria-labelledby="portfolio1ModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img class="card-img-top" src="{% static 'single_pages/img/pawel-czerwinski-sXESiqE2gN0-unsplash.jpg' %}"
+          alt="">
+        <div class="card-body">
+          <h5 class="card-title">
+            직장인을 위한 프로그래밍 입문과 업무 자동화 활용
+          </h5>
+          <p>파이썬 업무 자동화에 대한 인프런 동영상 강의 입니다.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+  
