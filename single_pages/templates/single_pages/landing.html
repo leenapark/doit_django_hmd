@@ -8,13 +8,12 @@
   <link rel="stylesheet" href="{% static 'single_pages/css/landing.css' %}" media="screen">
 {% endblock %}
 
-
-{% block main_area %}
-  <section>
-    <div class="row justify-content-between">
-      <div class="col-lg-6 text-light">
-        <h1>여기는 코즈랩 홈페이지 입니다.</h1>
+<section>
+  {% block main_area %}
+      <div class="row justify-content-between">
+        <div class="col-lg-6 text-light">
+          <h1>여기는 코즈랩 홈페이지 입니다.</h1>
+        </div>
       </div>
-    </div>
-  </section>
-{% endblock %}
+  {% endblock %}
+</section>

@@ -14,6 +14,8 @@ class PostList(ListView):
   # 파일명을 위에 있는 규칙으로 하지 않을 경우 명시해줘야함. 
   # template_name = 'blog/post_list.html'
   ordering = "-pk"
+  # 한 페이지 당 보여줄 포스트 갯수 정하기
+  paginate_by = 4
 
   def get_context_data(self, **kwargs):
     context = super(PostList, self).get_context_data()
