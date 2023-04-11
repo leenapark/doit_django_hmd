@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.naver',    
     # 'allauth.socialaccount.providers.kakao',
+    "crispy_forms",
+    "crispy_bootstrap4",
 ]
 
 MIDDLEWARE = [
@@ -174,3 +176,7 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 # }
 
 LOGIN_REDIRECT_URL = "/blog/"
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
