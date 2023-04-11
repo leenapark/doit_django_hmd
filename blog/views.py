@@ -9,6 +9,10 @@ from .models import Post, Category, Tag, Comment
 from .form import PostForm, CommentForm
 
 # Create your views here.
+
+
+""" *****************Post***************** """
+
 # 게시글 목록
 class PostList(ListView):
   model = Post
@@ -44,6 +48,9 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
   form_class = PostForm
   template_name = "blog/post_form.html"
 
+  # 접근 사용자 제어 : 스태프 이상만 글 쓰기
+  # PostCreate에 UserPassesTestMixin을 추가한다.
+  # test_func()함수를 추가해 접근 가능한 사용자를 제한한다.
   def test_func(self):
     return self.request.user.is_superuser or self.request.user.is_staff
 
@@ -51,23 +58,28 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     current_user = self.request.user
     if current_user.is_authenticated and (current_user.is_staff or current_user.is_superuser):
       form.instance.author = current_user
+      # 태그 입력
+      # form_valid() 함수 결과 값을 변수에 담아놓음
       response = super(PostCreate, self).form_valid(form)
+      # 작성자가 넣은 태그를 가져옴 : input name 값 사용
       tags_str = self.request.POST.get("tags_str")
       print(tags_str)
 
+      # 작성자가 태그를 넣었을 경우
       if tags_str:
         tags_str = tags_str.strip()
         tags_str = tags_str.replace(",", ";")
         tags_list = tags_str.split(";")
 
-
         for t in tags_list:
-          t = t.strip()
-          tag, is_tag_created = Tag.objects.get_or_create(name=t)
-          if is_tag_created:
-            tag.slug = slugify(t, allow_unicode=True)
-            tag.save()
-          self.object.tags.add(tag)
+          # list에 담긴 공백 제외하고 tags 저장
+          if t != "":
+            t = t.strip()
+            tag, is_tag_created = Tag.objects.get_or_create(name=t)
+            if is_tag_created:
+              tag.slug = slugify(t, allow_unicode=True)
+              tag.save()
+            self.object.tags.add(tag)
 
       return response
     else:
@@ -75,12 +87,14 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     
 # 포스트 수정
 class PostUpdate(LoginRequiredMixin, UpdateView):
+  # 기존 글을 받아옴
   model = Post
   # fields = ["title", "hook_text", "content", "head_image", "file_upload", "category", "tags"]
-
+  # summernote 적용
   form_class = PostForm
   template_name = "blog/post_update_form.html"
 
+  # 기존 태그를 수정할 수 있음
   def get_context_data(self, **kwargs):
     context = super().get_context_data()
     if self.object.tags.exists():
@@ -89,7 +103,7 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
         tags_str_list.append(t.name)
       context["tags_str_default"] = "; ".join(tags_str_list)
     return context
-
+  
   def form_valid(self, form):
     response = super(PostUpdate, self).form_valid(form)
     self.object.tags.clear()
@@ -100,14 +114,17 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
         tags_list = tags_str.split(";")
         for t in tags_list:
           t = t.strip()
-          tag, is_tag_created = Tag.objects.get_or_create(name=t)
-          if is_tag_created:
-            tag.slug = slugify(t, allow_unicode=True)
-            tag.save()
+          if t != "":
+            tag, is_tag_created = Tag.objects.get_or_create(name=t)
+            if is_tag_created:
+              tag.slug = slugify(t, allow_unicode=True)
+              tag.save()
           self.object.tags.add(tag)
 
     return response
 
+  # dispatch : method = "POST"인지 판단하고 POST 일 경우 폼이 유효한지 판단해주는 함수
+  # dispatch 가 실행되면 요청자가 작성자와 같은지 확인함
   def dispatch(self, request, *args, **kwargs):
     if request.user.is_authenticated and request.user == self.get_object().author:
       return super(PostUpdate, self).dispatch(request, *args, **kwargs)
@@ -131,8 +148,8 @@ class PostSearch(PostList):
     context["search_info"] = f"Search: {q} ({self.get_queryset().count()})"
     return context
 
-""" *************댓글********************* """
-
+""" *****************댓글**************** """
+# 댓글 작성
 def new_comment(request, pk):
   if request.user.is_authenticated:
     post = get_object_or_404(Post, pk=pk)
@@ -148,6 +165,7 @@ def new_comment(request, pk):
       else:
         return redirect(post.get_absolute_url())
     else:
+      # 로그인이 되지 않은 상태
       raise PermissionDenied
 
 # 댓글 수정
@@ -170,7 +188,7 @@ def delete_comment(request, pk):
   else:
     raise PermissionDenied
 
-""" *************카테고리********************* """
+""" ****************카테고리*************** """
 def category_page(request, slug):
   # context = {}
   # category = Category.objects.get(slug=slug)

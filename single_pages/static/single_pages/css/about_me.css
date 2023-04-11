@@ -1,3 +1,7 @@
 .margin-for-footer {
   margin-bottom: 130px;
 }
+
+.row .card .card-img-top {
+  size: 400px 200px;
+}

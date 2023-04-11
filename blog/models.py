@@ -65,6 +65,9 @@ class Post(models.Model):
     return self.get_file_name().split(".")[-1]
 
 # comment
+# 댓글이 달리는 포스트
+# 댓글 작성자 정보/시간
+# 댓글 작성 공간
 class Comment(models.Model):
   post = models.ForeignKey(Post, on_delete=models.CASCADE)
   author = models.ForeignKey(User, on_delete=models.CASCADE)

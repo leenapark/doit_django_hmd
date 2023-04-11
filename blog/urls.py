@@ -14,5 +14,5 @@ urlpatterns = [
     # 댓글 수정
     path("update_comment/<int:pk>/", views.CommentUpdate.as_view()),
     # 댓글 삭제
-    path("delete_comment/<int:pk>", views.delete_comment)
+    path("delete_comment/<int:pk>", views.delete_comment),
 ]
