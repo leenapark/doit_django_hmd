@@ -23,6 +23,12 @@
                 <a href="#!">{{ post.author | upper }}</a>
             </p>
             <hr />
+            <!-- update -->
+            {% if user.is_authenticated and user == post.author %}
+                <a href="/blog/update_post/{{post.pk}}/" class="btn btn-info btn-sm float-right" role="button"><i class="bi bi-pencil-square"></i>
+                     Edit Post
+                </a>
+            {% endif %}
             <!-- Date and time-->
             <p>Posted on {{ post.created_at }}</p>
             <hr />
