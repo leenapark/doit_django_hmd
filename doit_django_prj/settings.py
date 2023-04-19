@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-&yr3!$31qh4ep0t3lc(o0u3$%#v-fzcde_s=i@a%%f(i9$x#1(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["43.200.178.212"]
+ALLOWED_HOSTS = ['192.168.0.68']
 
 
 # Application definition
@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     # 'allauth.socialaccount.providers.kakao',
     "crispy_forms",
     "crispy_bootstrap4",
+    "food_sales",
 ]
 
 MIDDLEWARE = [

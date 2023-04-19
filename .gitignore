@@ -131,3 +131,4 @@ dmypy.json
 doit_venv/
 migrations/
 note/
+datas/
