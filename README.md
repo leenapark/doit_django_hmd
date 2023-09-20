@@ -1,4 +1,4 @@
-# doit_django_hmd
+# doit_django
 doit django 교재 실습
 
 ## doit_django_hmd 환경
